@@ -112,6 +112,14 @@ def _get_arg_parser(is_script=True):
     )
 
     parser.add_argument(
+        "--out-file",
+        default="",
+        dest="out_file",
+        help="Out file path"
+             "stix2_slider <file> --out-file=\"./out_file_stix_1.x.yml\""
+    )
+
+    parser.add_argument(
         "--use-namespace",
         dest="use_namespace",
         help="Override the 'example' namespace with provided one. The format is"
@@ -130,7 +138,13 @@ def main():
 
     initialize_options(slider_args)
     result = slide_file(slider_args.file_)
+
     if result:
+      if slider_args.out_file:
+        f = open(slider_args.out_file,"w+")
+        f.write(result)
+        f.close()
+      else:
         print(result + "\n")
     else:
         sys.exit(1)
