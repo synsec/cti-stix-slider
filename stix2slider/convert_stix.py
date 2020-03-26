@@ -406,7 +406,8 @@ def add_missing_property_to_description(obj1x, property_name, property_value):
         if _STIX_1_VERSION == "1.2":
             obj1x.add_description(property_name + ": " + text_type(property_value))
         else:
-            obj1x.description = property_name + ": " + text_type(property_value)
+            property_value_str = property_name + ": " + text_type(property_value)
+            obj1x.description = str(obj1x.description) + "\n" + str(property_value_str)
 
 
 def add_missing_list_property_to_description(obj1x, property_name, property_values):
@@ -414,7 +415,8 @@ def add_missing_list_property_to_description(obj1x, property_name, property_valu
         if _STIX_1_VERSION == "1.2":
             obj1x.add_description(property_name + ": " + ", ".join(property_values))
         else:
-            obj1x.description = property_name + ": " + ", ".join(property_values)
+            property_values_list = property_name + ": " + ", ".join(property_values)
+            obj1x.description = str(obj1x.description) + "\n" + str(property_values_list)
 
 
 _KILL_CHAINS = {}
